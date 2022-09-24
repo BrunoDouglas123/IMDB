@@ -10,12 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class Usuario implements Serializable{
+@Table(name = "usuario")
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 4814048890204697430L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
 	private Long id;
 	
 	@Column(name = "nome", length = 90, nullable = false)
@@ -27,14 +28,18 @@ public class Usuario implements Serializable{
 	@Column(name = "senha", length = 90, nullable = false)
 	private String senha;
 	
+	@Column(name = "admin", length = 10, nullable = false)
+	boolean admin;
+		
 	public Usuario() {		
 	}
 
-	public Usuario(Long id, String nome, String email, String senha) {
+	public Usuario(Long id, String nome, String email, String senha, boolean admin) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.admin = admin;
 	}
 
 	public Long getId() {
