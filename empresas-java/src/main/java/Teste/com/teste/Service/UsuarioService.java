@@ -16,36 +16,36 @@ import Teste.com.teste.Repository.UsuarioRepository;
 public class UsuarioService {
 	
 	@Autowired
-	private UsuarioRepository usitory;
+	private UsuarioRepository repository;
 	
 	public List<UsuarioDTO> findAll() {
-		List<Usuario> result = usitory.findAll();
+		List<Usuario> result = repository.findAll();
 		return result.stream().map(x -> new
 		UsuarioDTO(x)).collect(Collectors.toList());
 	}
 	
 	public Usuario findById(Long id) {
-		Optional<Usuario> v = usitory.findById(id);
+		Optional<Usuario> v = repository.findById(id);
 		return v.get();
 	}
 	
 	public Usuario save(Usuario Usuario) {
-		Usuario v = usitory.save(Usuario);
+		Usuario v = repository.save(Usuario);
 		return v;
 	}
 	
 	@Transactional
 	public Usuario update(Long id,Usuario Usuario) {
-		Usuario v = usitory.getById(id);
+		Usuario v = repository.getById(id);
 		v.setId(id); 
 		v.setNome(Usuario.getNome());
 		v.setEmail(Usuario.getEmail());
 		v.setSenha(Usuario.getSenha());
-		Usuario vendpt = usitory.save(v);
+		Usuario vendpt = repository.save(v);
 		return vendpt;
 	}
 	
 	public void delete(Long id) {
-		usitory.deleteById(id);
+		repository.deleteById(id);
 	}
 }

@@ -1,24 +1,24 @@
 package Teste.com.teste.Model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Filme")
-public class Filme implements Serializable {
-	private static final long serialVersionUID = -5108788214274739225L;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
+@Table(name = "filme")
+public class Filme {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_movie")
 	private Long id;
 	
 	@Column(name = "nome", length = 90, nullable = false)
@@ -33,20 +33,27 @@ public class Filme implements Serializable {
 	@Column(name = "diretor", length = 90, nullable = false)
 	private String diretor;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_user")
-	private Usuario usuario;
+	@JsonIgnore
+	@OneToMany(mappedBy = "filme")
+	private List<Voto> votos = new ArrayList<>();
 	
 	public Filme() {		
 	}
 
-	public Filme(Long id, String nome, String genero, String ator, String diretor, Usuario usuario) {
+	public Filme(Long id, String nome, String genero, String ator, String diretor) {
 		this.id = id;
 		this.nome = nome;
 		this.genero = genero;
 		this.ator = ator;
 		this.diretor = diretor;
-		this.usuario = usuario;
+	}
+
+	public Filme(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Filme(long l, String string, String string2, String string3, String string4) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -88,12 +95,18 @@ public class Filme implements Serializable {
 	public void setDiretor(String diretor) {
 		this.diretor = diretor;
 	}
-
-	public Usuario getUsuario() {
-		return usuario;
+	
+	public List<Voto> getVotos() {
+		return votos;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public static Object builder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Filme statusCode(int value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

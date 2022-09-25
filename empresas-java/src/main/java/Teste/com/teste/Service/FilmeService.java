@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import Teste.com.teste.DTO.FilmeDTO;
 import Teste.com.teste.Model.Filme;
-import Teste.com.teste.Model.Usuario;
 import Teste.com.teste.Repository.FilmeRepository;
-import Teste.com.teste.Repository.UsuarioRepository;
 
 @Service
 public class FilmeService {
@@ -20,37 +18,32 @@ public class FilmeService {
 	@Autowired
 	private FilmeRepository repository;
 	
-	@Autowired
-	private UsuarioRepository vendrepository;
-	
 	public List<FilmeDTO> findAll() {
-		List<Filme>result = repository.findAll();
-		return result.stream().map(x -> new 
+		List<Filme> result = repository.findAll();
+		return result.stream().map(x -> new
 		FilmeDTO(x)).collect(Collectors.toList());
 	}
 	
 	public Filme findById(Long id) {
-		Optional<Filme> p = repository.findById(id);
-		return p.get();
+		Optional<Filme> v = repository.findById(id);
+		return v.get();
 	}
 	
 	public Filme save(Filme Filme) {
-		Usuario Usuario = vendrepository.findById
-		(Filme.getUsuario().getId()).get();
-		Filme.setUsuario(Usuario);
 		Filme v = repository.save(Filme);
 		return v;
 	}
 	
 	@Transactional
 	public Filme update(Long id,Filme Filme) {
-		Filme p = repository.getById(id);
-		p.setId(id);
-		p.setNome(Filme.getNome());
-		p.setGenero(Filme.getGenero());
-		p.setAtor(Filme.getAtor());
-		Filme prod = repository.save(p);
-		return prod;
+		Filme v = repository.getById(id);
+		v.setId(id); 
+		v.setNome(Filme.getNome());
+		v.setGenero(Filme.getGenero());
+		v.setAtor(Filme.getAtor());
+		v.setDiretor(Filme.getDiretor());
+		Filme vendpt = repository.save(v);
+		return vendpt;
 	}
 	
 	public void delete(Long id) {

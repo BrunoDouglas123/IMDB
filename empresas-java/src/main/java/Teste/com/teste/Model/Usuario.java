@@ -1,7 +1,5 @@
 package Teste.com.teste.Model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,35 +9,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
-	private static final long serialVersionUID = 4814048890204697430L;
-
+public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_user")
 	private Long id;
 	
 	@Column(name = "nome", length = 90, nullable = false)
 	private String nome;
-	
-	@Column(name = "email", length = 90, nullable = false)
+
+	@Column(name = "email", length = 90, unique = true, nullable = false)
 	private String email;
 	
 	@Column(name = "senha", length = 90, nullable = false)
 	private String senha;
 	
-	@Column(name = "admin", length = 10, nullable = false)
-	boolean admin;
-		
 	public Usuario() {		
 	}
 
-	public Usuario(Long id, String nome, String email, String senha, boolean admin) {
+	public Usuario(Long id, String nome, String email, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.admin = admin;
+	}
+
+	public Usuario(String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -72,5 +68,20 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Object getAppUserRoles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Usuario statusCode(int value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
