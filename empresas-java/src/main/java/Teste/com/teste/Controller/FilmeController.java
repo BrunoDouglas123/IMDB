@@ -19,7 +19,7 @@ import Teste.com.teste.Model.Filme;
 import Teste.com.teste.Service.FilmeService;
 
 @RestController
-@RequestMapping(value = "filmes")
+@RequestMapping(value = "/filmes")
 public class FilmeController {
 	
 	@Autowired
