@@ -3,6 +3,8 @@ package Teste.com.teste.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Teste.com.teste.DTO.UsuarioDTO;
 import Teste.com.teste.Model.Usuario;
+import Teste.com.teste.Repository.UsuarioRepository;
 import Teste.com.teste.Service.UsuarioService;
 
 @RestController
 @RequestMapping(value = "usuarios")
 public class UsuarioController {
+	
+	@Autowired
+	private UsuarioRepository repository;
 	
 	@Autowired
 	private UsuarioService service;
@@ -37,6 +43,13 @@ public class UsuarioController {
 		System.out.println("User: " + id);
 		UsuarioDTO v = new UsuarioDTO(service.findById(id));
 		return ResponseEntity.ok(v);
+	}
+	
+	@GetMapping("/{page}")
+	public ResponseEntity<Page<Usuario>> findPage(Pageable pageable) {
+		System.out.println("List of Users:");
+		Page<Usuario> list = repository.findPage(pageable);
+		return ResponseEntity.ok(list);
 	}
 	
 	@PostMapping

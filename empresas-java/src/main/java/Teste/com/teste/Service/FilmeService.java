@@ -29,6 +29,26 @@ public class FilmeService {
 		return v.get();
 	}
 	
+	public Filme findByName(String nome) {
+		Optional<Filme> v = repository.findByName(nome);
+		return v.get();
+	}
+	
+	public Filme findByGenero(String genero) {
+		Optional<Filme> v = repository.findByGenero(genero);
+		return v.get();
+	}
+	
+	public Filme findByAtor(String ator) {
+		Optional<Filme> v = repository.findByAtor(ator);
+		return v.get();
+	}
+	
+	public Filme findByDiretor(String diretor) {
+		Optional<Filme> v = repository.findByDiretor(diretor);
+		return v.get();
+	}
+	
 	public Filme save(Filme Filme) {
 		Filme v = repository.save(Filme);
 		return v;
